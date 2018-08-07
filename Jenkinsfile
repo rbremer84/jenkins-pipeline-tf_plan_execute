@@ -27,11 +27,19 @@ pipeline {
             }
         }
         stage('tf create') {
-            steps {               
+            input {
+                message "Proceed to build EC2 instance?"
+                ok "Yes, build."
+            }            
+            steps {         
                 sh 'ansible-playbook -i playbooks/hosts playbooks/create_ec2.yml'
             }
         }
         stage('tf destroy') {
+            input {
+                message "Destroy EC2 instance?"
+                ok "Yes, destroy."
+            }            
             steps {               
                 sh 'ansible-playbook -i playbooks/hosts playbooks/destroy_ec2.yml'
             }
