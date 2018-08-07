@@ -14,7 +14,6 @@ pipeline {
                 sh 'aws s3 cp s3://rbremer-temp/terraform.tfvars tf_scripts/'
                 sh 'wget -P tf_scripts/ $tf_url && unzip -o tf_scripts/$tf_package -d tf_scripts/ ; rm -f tf_scripts/$tf_package'
                 sh 'cd tf_scripts/ && ./terraform init'
-                sh 'echo v05'
             }
         }
         stage('stage ansible') {
